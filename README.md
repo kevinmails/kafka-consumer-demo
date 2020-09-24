@@ -5,6 +5,7 @@
 
 
 ####需要JDK1.8以上环境
+
 1.本机安装kafka,官方安装手册：https://kafka.apache.org/quickstart
 
 2.下载源码，导入IDE
