@@ -20,19 +20,19 @@ public class KafkaConsumer {
     private static Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
 
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 3, 1,
-            TimeUnit.SECONDS, new SynchronousQueue<>(),
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 3, 1, TimeUnit.SECONDS,
+            new SynchronousQueue<>(),
             new ThreadFactoryBuilder().setNameFormat("KThread-%d").build(),
-//            (r, executor) -> {
-//                logger.warn("Ops，Rejected！");
-//                try {
-//                    executor.getQueue().put(r);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-                        new ThreadPoolExecutor.CallerRunsPolicy()
+            (r, executor) -> {
+                logger.warn("Ops，Rejected！");
+                try {
+                    executor.getQueue().put(r);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+//                        new ThreadPoolExecutor.CallerRunsPolicy()
 
     );
 
