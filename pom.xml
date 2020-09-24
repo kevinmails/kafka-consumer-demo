@@ -17,6 +17,10 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+	<modules>
+		<module>kafka-producer</module>
+		<module>kafka-consumer</module>
+	</modules>
 
 	<dependencies>
 		<dependency>
@@ -50,12 +54,16 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>29.0-jre</version>
-		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>29.0-jre</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>

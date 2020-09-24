@@ -17,14 +17,23 @@ import java.util.concurrent.*;
  */
 @Service
 public class KafkaConsumer {
-    private static Logger logger = LoggerFactory.getLogger(KafkaConsumerDemoApplication.class);
+    private static Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
 
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 5, 1,
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 3, 1,
             TimeUnit.SECONDS, new SynchronousQueue<>(),
             new ThreadFactoryBuilder().setNameFormat("KThread-%d").build(),
-            (r, executor) -> System.out.println("Ops，Rejected！")
-//            new ThreadPoolExecutor.CallerRunsPolicy()
+//            (r, executor) -> {
+//                logger.warn("Ops，Rejected！");
+//                try {
+//                    executor.getQueue().put(r);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+                        new ThreadPoolExecutor.CallerRunsPolicy()
+
     );
 
     @KafkaListener(topics = "myTopic")
